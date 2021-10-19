@@ -9,7 +9,9 @@ public class Rook extends Pieces {
 
     private boolean hasMoved = false;
 
-    public Rook(String color) {
+    public Rook(String color, int ligne, int colonne) {
+        this.setLigne(ligne);
+        this.setColonne(colonne);
         if(color.toLowerCase().equals("blanc")) {
             this.color = ColorPawn.White;
         } else if (color.toLowerCase().equals("noir")) {

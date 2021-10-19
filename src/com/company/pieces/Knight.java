@@ -7,7 +7,9 @@ import java.util.ArrayList;
 
 public class Knight extends Pieces {
 
-    public Knight(String color) {
+    public Knight(String color, int ligne, int colonne) {
+        this.setLigne(ligne);
+        this.setColonne(colonne);
         if(color.toLowerCase().equals("blanc")) {
             this.color = ColorPawn.White;
         } else if (color.toLowerCase().equals("noir")) {

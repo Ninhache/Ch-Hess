@@ -20,10 +20,18 @@ public abstract class Pieces {
     public abstract ArrayList<BoardCase> getAccessibleCases();
 
     public int getColonne() {
-        return colonne;
+        return this.colonne;
     }
 
     public int getLigne() {
-        return ligne;
+        return this.ligne;
+    }
+
+    public void setColonne(int colonne) {
+        this.colonne = colonne;
+    }
+
+    public void setLigne(int ligne) {
+        this.ligne = ligne;
     }
 }

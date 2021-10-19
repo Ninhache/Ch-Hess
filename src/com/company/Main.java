@@ -8,10 +8,10 @@ public class Main {
         Board b = new Board();
         Scanner sc = new Scanner(System.in);
 
-        //b.initiateBoard("rnbqkbnr/pppppppp/--------/--------/--------/--------/PPPPPPPP/RNBQKBNR");
-        b.initiateBoard("--------/--------/--------/--------/----b---/--------/--------/--------");
+        b.initiateBoard("rnbqkbnr/pppppppp/--------/--------/--------/--------/PPPPPPPP/RNBQKBNR");
+        //b.initiateBoard("--------/--------/--------/--------/----b---/--------/--------/--------");
 
-        b.setSelected("B2");
+        b.setSelected("G3");
 
 
         System.out.println(b);

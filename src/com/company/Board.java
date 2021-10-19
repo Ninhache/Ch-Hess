@@ -2,6 +2,8 @@ package com.company;
 
 import com.company.pieces.*;
 
+import javax.swing.*;
+
 public class Board {
 
     private BoardCase[][] board;
@@ -15,17 +17,20 @@ public class Board {
     }
 
     public BoardCase setSelected(String selected) {
-
-        if(!isOnBoard(selected)) {
-            this.selected = null;
-            return this.selected;
-        }
-
         selected = selected.toUpperCase();
         int colonne = (selected.charAt(0) - 'A') % this.board.length;
         int ligne = Integer.parseInt(selected.charAt(1) + "");
 
-        this.selected = this.board[colonne][ligne];
+        if(!isOnBoard(selected)) {
+            this.selected = null;
+            return this.selected;
+        } else if(this.board[colonne][ligne].getPieces() != null) {
+            this.selected = this.board[colonne][ligne];
+            this.selected.setPieces(this.board[colonne][ligne].getPieces());
+        } else {
+            this.selected = null;
+            return this.selected;
+        }
         return this.selected;
     }
 
@@ -65,22 +70,22 @@ public class Board {
             System.out.println(this.board[ligne][colonne]);
             switch (Character.toLowerCase(piece)) {
                 case 'p':
-                    this.board[ligne][colonne].setPieces(new Pawn(isWhite ? "Blanc" : "Noir"));
+                    this.board[ligne][colonne].setPieces(new Pawn(isWhite ? "Blanc" : "Noir", ligne, colonne));
                     break;
                 case 'r':
-                    this.board[ligne][colonne].setPieces(new Rook(isWhite ? "Blanc" : "Noir"));
+                    this.board[ligne][colonne].setPieces(new Rook(isWhite ? "Blanc" : "Noir", ligne, colonne));
                     break;
                 case 'n':
-                    this.board[ligne][colonne].setPieces(new Knight(isWhite ? "Blanc" : "Noir"));
+                    this.board[ligne][colonne].setPieces(new Knight(isWhite ? "Blanc" : "Noir", ligne, colonne));
                     break;
                 case 'b':
-                    this.board[ligne][colonne].setPieces(new Bishop(isWhite ? "Blanc" : "Noir"));
+                    this.board[ligne][colonne].setPieces(new Bishop(isWhite ? "Blanc" : "Noir", ligne, colonne));
                     break;
                 case 'q':
-                    this.board[ligne][colonne].setPieces(new Queen(isWhite ? "Blanc" : "Noir"));
+                    this.board[ligne][colonne].setPieces(new Queen(isWhite ? "Blanc" : "Noir", ligne, colonne));
                     break;
                 case 'k':
-                    this.board[ligne][colonne].setPieces(new King(isWhite ? "Blanc" : "Noir"));
+                    this.board[ligne][colonne].setPieces(new King(isWhite ? "Blanc" : "Noir", ligne, colonne));
                     break;
                 default:
                     break;
@@ -99,25 +104,36 @@ public class Board {
         return board[c1][c2].getPieces();
     }
 
+
+
     @Override
     public String toString() {
 
         String res = "   0  1  2  3  4  5  6  7\n";
 
+        System.out.println(this.selected.getPieces().getAccessibleCases());
+
         for(int i = 0 ; i < board[0].length ; i++ ) {
             res += (char)('A' + i)+ " " ;
             for( int j = 0 ; j < board[1].length ; j++ ) {
-                System.out.println(">>"+this.selected);
-                if(this.selected != null) {
-                    if(this.selected.getPieces().getAccessibleCases().contains(board[i][j])){
-                        res += "[□]";
-                    } else if(this.selected == board[i][j]) {
-                        res += "{" + board[i][j] + "}";
+                if(this.board[i][j].getPieces() != null) {
+                    if(this.selected != null ) {
+                        if(this.selected.getPieces().getAccessibleCases().contains(board[i][j])) {
+                            res += "[O]";
+                        } else if(this.selected == board[i][j]) {
+                            res += "{"+ board[i][j].getPieces() +"}";
+                        } else {
+                            res += "["+ board[i][j].getPieces() +"]";
+                        }
                     } else {
-                        res += "[" + board[i][j] + "]";
+                        res += "[ ]";
                     }
                 } else {
-                    res += "[ ]";
+                    if(this.selected.getPieces().getAccessibleCases().contains(this.board[i][j])) {
+                        res += "[O]";
+                    } else {
+                        res += "[ ]";
+                    }
                 }
             }
             res += "\n";
