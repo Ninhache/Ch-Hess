@@ -1,6 +1,9 @@
 package com.company.pieces;
 
+import com.company.BoardCase;
 import com.company.ColorPawn;
+
+import java.util.ArrayList;
 
 public class Rook extends Pieces {
 
@@ -25,8 +28,8 @@ public class Rook extends Pieces {
     }
 
     @Override
-    public int[] accessibleCases() {
-        return new int[0];
+    public ArrayList<BoardCase> getAccessibleCases() {
+        return new ArrayList<>();
     }
 
     @Override

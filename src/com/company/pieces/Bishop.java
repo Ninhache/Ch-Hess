@@ -1,6 +1,9 @@
 package com.company.pieces;
 
+import com.company.BoardCase;
 import com.company.ColorPawn;
+
+import java.util.ArrayList;
 
 public class Bishop extends Pieces {
 
@@ -23,8 +26,13 @@ public class Bishop extends Pieces {
     }
 
     @Override
-    public int[] accessibleCases() {
-        return new int[0];
+    public ArrayList<BoardCase> getAccessibleCases() {
+
+        for (int i = 0; i < 5 ; i++) {
+            System.out.println("o");
+        }
+
+        return null;
     }
 
     @Override
@@ -33,5 +41,7 @@ public class Bishop extends Pieces {
         char res = name().charAt(0);
 
         return this.getColor() == ColorPawn.White ? Character.toLowerCase(res) + "" : Character.toUpperCase(res) + "" ;
+
     }
+
 }

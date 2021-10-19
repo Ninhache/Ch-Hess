@@ -4,20 +4,17 @@ import com.company.pieces.*;
 
 public class Board {
 
-
-
-    private Pieces[][] board;
-    private Pieces selected;
-
+    private BoardCase[][] board;
+    private BoardCase selected;
 
     public Board() {
 
-        board = new Pieces[8][8];
+        board = new BoardCase[8][8];
         this.selected = null;
 
     }
 
-    public Pieces setSelected(String selected) {
+    public BoardCase setSelected(String selected) {
 
         if(!isOnBoard(selected)) {
             this.selected = null;
@@ -33,6 +30,7 @@ public class Board {
     }
 
     public boolean isOnBoard(String selected) {
+        System.out.println(selected);
         return true;
     }
 
@@ -40,7 +38,7 @@ public class Board {
 
         if( ((int)(letter - 65) < 0 || (int)(letter - 65) > 8) || (number < 0 || number > 8)) return;
 
-        this.board[letter - 65][number] = p;
+        this.board[letter - 65][number].setPieces(p);
 
     }
 
@@ -63,24 +61,26 @@ public class Board {
 
             boolean isWhite = Character.isLowerCase(piece);
 
+            this.board[ligne][colonne] = new BoardCase(ligne, colonne);
+            System.out.println(this.board[ligne][colonne]);
             switch (Character.toLowerCase(piece)) {
                 case 'p':
-                    this.board[ligne][colonne] = new Pawn(isWhite ? "Blanc" : "Noir");
+                    this.board[ligne][colonne].setPieces(new Pawn(isWhite ? "Blanc" : "Noir"));
                     break;
                 case 'r':
-                    this.board[ligne][colonne] = new Rook(isWhite ? "Blanc" : "Noir");
+                    this.board[ligne][colonne].setPieces(new Rook(isWhite ? "Blanc" : "Noir"));
                     break;
                 case 'n':
-                    this.board[ligne][colonne] = new Knight(isWhite ? "Blanc" : "Noir");
+                    this.board[ligne][colonne].setPieces(new Knight(isWhite ? "Blanc" : "Noir"));
                     break;
                 case 'b':
-                    this.board[ligne][colonne] = new Bishop(isWhite ? "Blanc" : "Noir");
+                    this.board[ligne][colonne].setPieces(new Bishop(isWhite ? "Blanc" : "Noir"));
                     break;
                 case 'q':
-                    this.board[ligne][colonne] = new Queen(isWhite ? "Blanc" : "Noir");
+                    this.board[ligne][colonne].setPieces(new Queen(isWhite ? "Blanc" : "Noir"));
                     break;
                 case 'k':
-                    this.board[ligne][colonne] = new King(isWhite ? "White" : "Negro");
+                    this.board[ligne][colonne].setPieces(new King(isWhite ? "Blanc" : "Noir"));
                     break;
                 default:
                     break;
@@ -96,8 +96,7 @@ public class Board {
 
         if( ((int)(c1 - 65) < 0 || (int)(c1 - 65) > 8) || (c2 < 0 || c2 > 8)) return null;
 
-
-        return board[c1][c2];
+        return board[c1][c2].getPieces();
     }
 
     @Override
@@ -108,10 +107,17 @@ public class Board {
         for(int i = 0 ; i < board[0].length ; i++ ) {
             res += (char)('A' + i)+ " " ;
             for( int j = 0 ; j < board[1].length ; j++ ) {
-                if(!(this.selected == board[i][j])) {
-                    res += "[" + (board[i][j] == null ? " " : board[i][j] ) + "]";
+                System.out.println(">>"+this.selected);
+                if(this.selected != null) {
+                    if(this.selected.getPieces().getAccessibleCases().contains(board[i][j])){
+                        res += "[□]";
+                    } else if(this.selected == board[i][j]) {
+                        res += "{" + board[i][j] + "}";
+                    } else {
+                        res += "[" + board[i][j] + "]";
+                    }
                 } else {
-                    res += "{" + (board[i][j] == null ? " " : board[i][j] ) + "}";
+                    res += "[ ]";
                 }
             }
             res += "\n";
