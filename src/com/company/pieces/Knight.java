@@ -1,10 +1,15 @@
 package com.company.pieces;
 
+import com.company.BoardCase;
 import com.company.ColorPawn;
+
+import java.util.ArrayList;
 
 public class Knight extends Pieces {
 
-    public Knight(String color) {
+    public Knight(String color, int ligne, int colonne) {
+        this.setLigne(ligne);
+        this.setColonne(colonne);
         if(color.toLowerCase().equals("blanc")) {
             this.color = ColorPawn.White;
         } else if (color.toLowerCase().equals("noir")) {
@@ -22,8 +27,8 @@ public class Knight extends Pieces {
         return this.color;
     }
     @Override
-    public int[] accessibleCases() {
-        return new int[0];
+    public ArrayList<BoardCase> getAccessibleCases() {
+        return new ArrayList<>();
     }
 
     @Override
