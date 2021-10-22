@@ -1,5 +1,6 @@
 package com.company.pieces;
 
+import com.company.Board;
 import com.company.BoardCase;
 import com.company.ColorPawn;
 
@@ -27,15 +28,21 @@ public class Knight extends Pieces {
         return this.color;
     }
     @Override
-    public ArrayList<BoardCase> getAccessibleCases() {
-        return new ArrayList<>();
+    public ArrayList<BoardCase> getAccessibleCases(Board board) {
+        ArrayList<BoardCase> tmp = new ArrayList<>();
+
+        if(board.isOnBoard(this.getLigne() -2, this.getColonne()+1)) if(board.getBoard()[this.getLigne() -2][this.getColonne()+1].isEmpty()) tmp.add(new BoardCase(this.getLigne() -2, this.getColonne()+1));
+        if(board.isOnBoard(this.getLigne() -2, this.getColonne()-1)) if(board.getBoard()[this.getLigne() -2][this.getColonne()-1].isEmpty()) tmp.add(new BoardCase(this.getLigne() -2, this.getColonne()-1));
+        if(board.isOnBoard(this.getLigne() +2, this.getColonne()-1)) if(board.getBoard()[this.getLigne() +2][this.getColonne()-1].isEmpty()) tmp.add(new BoardCase(this.getLigne() +2, this.getColonne()-1));
+        if(board.isOnBoard(this.getLigne() +2, this.getColonne()+1)) if(board.getBoard()[this.getLigne() +2][this.getColonne()+1].isEmpty()) tmp.add(new BoardCase(this.getLigne() +2, this.getColonne()+1));
+
+        if(board.isOnBoard(this.getLigne() +1, this.getColonne()+2)) if(board.getBoard()[this.getLigne() +1][this.getColonne()+2].isEmpty()) tmp.add(new BoardCase(this.getLigne() +1, this.getColonne()+2));
+        if(board.isOnBoard(this.getLigne() -1, this.getColonne()+2)) if(board.getBoard()[this.getLigne() -1][this.getColonne()+2].isEmpty()) tmp.add(new BoardCase(this.getLigne() -1, this.getColonne()+2));
+        if(board.isOnBoard(this.getLigne() +1, this.getColonne()-2)) if(board.getBoard()[this.getLigne() +1][this.getColonne()-2].isEmpty()) tmp.add(new BoardCase(this.getLigne() +1, this.getColonne()-2));
+        if(board.isOnBoard(this.getLigne() -1, this.getColonne()-2)) if(board.getBoard()[this.getLigne() -1][this.getColonne()-2].isEmpty()) tmp.add(new BoardCase(this.getLigne() -1, this.getColonne()-2));
+
+        return tmp;
     }
 
-    @Override
-    public String toString() {
 
-        char res = name().charAt(0);
-
-        return this.getColor() == ColorPawn.White ? Character.toLowerCase(res) + "" : Character.toUpperCase(res) + "" ;
-    }
 }

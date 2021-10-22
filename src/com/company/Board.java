@@ -6,6 +6,14 @@ import javax.swing.*;
 
 public class Board {
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
+    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+
+    public static final String ANSI_CYAN = "\u001b[36;1m";
+
+
+
     private BoardCase[][] board;
     private BoardCase selected;
 
@@ -35,8 +43,10 @@ public class Board {
     }
 
     public boolean isOnBoard(String selected) {
-        System.out.println(selected);
-        return true;
+        char lettre = selected.charAt(0);
+        char chiffre = selected.charAt(1);
+        System.out.println(((int)lettre - 'A') + " <-> " + ((int) chiffre - '0'));
+        return isOnBoard((int)lettre - 'A', (int) chiffre - '0');
     }
 
     public void setPieces(char letter, int number, Pieces p ) {
@@ -47,10 +57,19 @@ public class Board {
 
     }
 
+    public BoardCase[][] getBoard() {
+        return board;
+    }
+
     public void setPieces(int number, Pieces p ) {
 
         int letter = number%8;
 
+    }
+
+    public boolean isOnBoard(int ligne, int colonne) {
+        if(ligne < 0 || colonne < 0) return false;
+        return this.board.length > ligne && this.board[1].length > colonne;
     }
 
     // https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
@@ -67,7 +86,7 @@ public class Board {
             boolean isWhite = Character.isLowerCase(piece);
 
             this.board[ligne][colonne] = new BoardCase(ligne, colonne);
-            System.out.println(this.board[ligne][colonne]);
+
             switch (Character.toLowerCase(piece)) {
                 case 'p':
                     this.board[ligne][colonne].setPieces(new Pawn(isWhite ? "Blanc" : "Noir", ligne, colonne));
@@ -94,7 +113,6 @@ public class Board {
     }
 
     public Pieces getPieces(String s) {
-        //if(toString().length() != 2) return null;
 
         int c1 = Character.toUpperCase(s.charAt(0)) - 65;
         int c2 = Integer.parseInt(Character.toUpperCase(s.charAt(1)) + "");
@@ -111,14 +129,33 @@ public class Board {
 
         String res = "   0  1  2  3  4  5  6  7\n";
 
-        System.out.println(this.selected.getPieces().getAccessibleCases());
+        //System.out.println(this.selected.getPieces().getAccessibleCases(this));
 
         for(int i = 0 ; i < board[0].length ; i++ ) {
             res += (char)('A' + i)+ " " ;
             for( int j = 0 ; j < board[1].length ; j++ ) {
-                if(this.board[i][j].getPieces() != null) {
+                String piece = board[i][j].getPieces() == null ? "   " : board[i][j].getPieces().toString();
+                if(this.selected != null) {
+                    if(this.selected == board[i][j]) {
+                        String selectedChar = selected.getPieces().getClass().getSimpleName().charAt(0) + "";
+                        selectedChar = this.selected.getPieces().getColor() == ColorPawn.White ? selectedChar.toLowerCase() : selectedChar.toUpperCase();
+                        res += ANSI_GREEN_BACKGROUND + ( " " + selectedChar + " ") + ANSI_RESET;
+                    } else if (this.selected.getPieces().getAccessibleCases(this).contains(board[i][j])){
+                        res += ANSI_RED_BACKGROUND + ANSI_CYAN + " O " + ANSI_RESET;
+                    } else {
+                        res += piece ;
+                    }
+                } else {
+                    if(this.board[i][j].getPieces() != null) {
+                        res += piece ;
+                    } else {
+                        res += "   ";
+                    }
+
+                }
+                /*if(this.board[i][j].getPieces() != null) {
                     if(this.selected != null ) {
-                        if(this.selected.getPieces().getAccessibleCases().contains(board[i][j])) {
+                        if(this.selected.getPieces().getAccessibleCases(this).contains(board[i][j])) {
                             res += "[O]";
                         } else if(this.selected == board[i][j]) {
                             res += "{"+ board[i][j].getPieces() +"}";
@@ -129,12 +166,12 @@ public class Board {
                         res += "[ ]";
                     }
                 } else {
-                    if(this.selected.getPieces().getAccessibleCases().contains(this.board[i][j])) {
+                    if(this.selected.getPieces().getAccessibleCases(this).contains(this.board[i][j])) {
                         res += "[O]";
                     } else {
                         res += "[ ]";
                     }
-                }
+                }*/
             }
             res += "\n";
         }

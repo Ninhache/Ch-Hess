@@ -1,5 +1,6 @@
 package com.company.pieces;
 
+import com.company.Board;
 import com.company.BoardCase;
 import com.company.ColorPawn;
 
@@ -28,22 +29,45 @@ public class Bishop extends Pieces {
     }
 
     @Override
-    public ArrayList<BoardCase> getAccessibleCases() {
+    public ArrayList<BoardCase> getAccessibleCases(Board board) {
+        ArrayList<BoardCase> tmp = new ArrayList<>();
 
-        for (int i = 0; i < 5 ; i++) {
-            System.out.println("o");
+        //bottom right
+        for( int i = 1 ; board.isOnBoard(this.getLigne() + i, this.getColonne() + i); i++ ) {
+            if(board.getBoard()[this.getLigne() + i][this.getColonne() + i].isEmpty()) {
+                tmp.add(new BoardCase(this.getLigne() + i, this.getColonne() + i));
+            } else {
+                break;
+            }
         }
 
-        return null;
+        //top right
+        for( int i = 1 ; board.isOnBoard(this.getLigne() - i, this.getColonne() + i); i++ ) {
+            if(board.getBoard()[this.getLigne() + i][this.getColonne() + i].isEmpty()) {
+                tmp.add(new BoardCase(this.getLigne() - i, this.getColonne() + i));
+            } else {
+                break;
+            }
+        }
+
+        //top left
+        for( int i = 1 ; board.isOnBoard(this.getLigne() - i, this.getColonne() - i); i++ ) {
+            if(board.getBoard()[this.getLigne() - i][this.getColonne() - i].isEmpty()) {
+                tmp.add(new BoardCase(this.getLigne() - i, this.getColonne() - i));
+            } else {
+                break;
+            }
+        }
+
+        //bottom left
+        for( int i = 1 ; board.isOnBoard(this.getLigne() + i, this.getColonne() - i); i++ ) {
+            if(board.getBoard()[this.getLigne() + i][this.getColonne() - i].isEmpty()) {
+                tmp.add(new BoardCase(this.getLigne() + i, this.getColonne() - i));
+            } else {
+                break;
+            }
+        }
+
+        return tmp;
     }
-
-    @Override
-    public String toString() {
-
-        char res = name().charAt(0);
-
-        return this.getColor() == ColorPawn.White ? Character.toLowerCase(res) + "" : Character.toUpperCase(res) + "" ;
-
-    }
-
 }

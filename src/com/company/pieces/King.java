@@ -1,5 +1,6 @@
 package com.company.pieces;
 
+import com.company.Board;
 import com.company.BoardCase;
 import com.company.ColorPawn;
 
@@ -30,15 +31,9 @@ public class King extends Pieces {
     }
 
     @Override
-    public ArrayList<BoardCase> getAccessibleCases() {
+    public ArrayList<BoardCase> getAccessibleCases(Board board) {
         return new ArrayList<>();
     }
 
-    @Override
-    public String toString() {
 
-        char res = name().charAt(0);
-
-        return this.getColor() == ColorPawn.White ? Character.toLowerCase(res) + "" : Character.toUpperCase(res) + "" ;
-    }
 }

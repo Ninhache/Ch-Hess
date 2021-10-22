@@ -28,6 +28,10 @@ public class BoardCase {
         return "["+ this.ligne + ";"+ this.colonne +"]";
     }
 
+    public boolean isEmpty() {
+        return this.pieces == null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
