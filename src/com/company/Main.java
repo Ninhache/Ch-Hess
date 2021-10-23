@@ -8,15 +8,10 @@ public class Main {
         Board b = new Board();
         Scanner sc = new Scanner(System.in);
 
-        b.initiateBoard("rnbqkbnr/pppppppp/--------/--------/----r---/--------/PPPPPPPP/RNBQKBNR");
-        //b.initiateBoard("--------/--------/----p---/--------/---qq---/--------/--------/--------");
+        //b.initiateBoard("rnbqkbnr/pppppppp/--------/--------/--------/--------/PPPPPPPP/RNBQKBNR");
+        b.initiateBoard("--------/--------/--Q-p---/--------/---qQ---/--------/--------/----pp--");
 
         b.setSelected("E4");
-
-        System.out.println(b.getSelected().getPieces().getAccessibleCases(b));
-        //System.out.println(b.getBoard()[6][4]);
-        System.out.println(b.getBoard()[6][4] + " ==> " + b.getSelected().getPieces().getAccessibleCases(b).contains(b.getBoard()[6][4]));
-        //System.out.println(b.getSelected().getPieces().getAccessibleCases(b).contains());
 
         System.out.println(b);
 
