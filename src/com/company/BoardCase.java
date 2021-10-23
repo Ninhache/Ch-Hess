@@ -34,10 +34,12 @@ public class BoardCase {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if(o == null) return false;
+        if(o.getClass() != this.getClass()) return false;
         BoardCase boardCase = (BoardCase) o;
-        return ligne == boardCase.ligne && colonne == boardCase.colonne && Objects.equals(pieces, boardCase.pieces);
+        if(this.colonne != boardCase.colonne) return false;
+        if(this.ligne != boardCase.ligne) return false;
+        return true;
     }
 
 }

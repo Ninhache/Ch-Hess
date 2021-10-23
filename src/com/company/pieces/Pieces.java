@@ -5,6 +5,8 @@ import com.company.BoardCase;
 import com.company.ColorPawn;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 public abstract class Pieces {
 
@@ -47,4 +49,13 @@ public abstract class Pieces {
         char res = name().charAt(0);
         return this.getColor() == ColorPawn.White ? ANSI_BG_WHITE + ANSI_FRONT_BLACK + " " +  Character.toLowerCase(res) + " " + ANSI_RESET : ANSI_BG_BLACK + ANSI_FRONT_WHITE + " " + Character.toUpperCase(res) + " " + ANSI_RESET ;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pieces pieces = (Pieces) o;
+        return this.getColonne() == pieces.getColonne() && this.getLigne() == pieces.getLigne() && this.getColor() == pieces.getColor();
+    }
+
 }
