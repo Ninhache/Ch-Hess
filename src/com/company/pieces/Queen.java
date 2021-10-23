@@ -36,6 +36,7 @@ public class Queen extends Pieces {
             if(board.getBoard()[this.getLigne() + i][this.getColonne() + i].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne() + i, this.getColonne() + i));
             } else {
+                if(board.getBoard()[this.getLigne() + i][this.getColonne() + i].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne() + i, this.getColonne() + i));
                 break;
             }
         }
@@ -45,6 +46,7 @@ public class Queen extends Pieces {
             if(board.getBoard()[this.getLigne() + i][this.getColonne() + i].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne() - i, this.getColonne() + i));
             } else {
+                if(board.getBoard()[this.getLigne() - i][this.getColonne() + i].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne() - i, this.getColonne() + i));
                 break;
             }
         }
@@ -54,6 +56,7 @@ public class Queen extends Pieces {
             if(board.getBoard()[this.getLigne() - i][this.getColonne() - i].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne() - i, this.getColonne() - i));
             } else {
+                if(board.getBoard()[this.getLigne() - i][this.getColonne() - i].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne() - i, this.getColonne() - i));
                 break;
             }
         }
@@ -63,15 +66,18 @@ public class Queen extends Pieces {
             if(board.getBoard()[this.getLigne() + i][this.getColonne() - i].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne() + i, this.getColonne() - i));
             } else {
+                if(board.getBoard()[this.getLigne() + i][this.getColonne() - i].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne() + i, this.getColonne() - i));
                 break;
             }
         }
+
 
         // RIGHT
         for( int i = 1 ; board.isOnBoard(this.getLigne(), this.getColonne() + i); i++ ) {
             if(board.getBoard()[this.getLigne()][this.getColonne() + i].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne(), this.getColonne() + i));
             } else {
+                if(board.getBoard()[this.getLigne()][this.getColonne() + i].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne(), this.getColonne() + i));
                 break;
             }
         }
@@ -81,6 +87,7 @@ public class Queen extends Pieces {
             if(board.getBoard()[this.getLigne()][this.getColonne() - i].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne(), this.getColonne() - i));
             } else {
+                if(board.getBoard()[this.getLigne()][this.getColonne() - i].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne(), this.getColonne() - i));
                 break;
             }
         }
@@ -90,6 +97,7 @@ public class Queen extends Pieces {
             if(board.getBoard()[this.getLigne() - i][this.getColonne()].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne() - i, this.getColonne()));
             } else {
+                if(board.getBoard()[this.getLigne() - i][this.getColonne()].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne() - i, this.getColonne()));
                 break;
             }
         }
@@ -99,10 +107,10 @@ public class Queen extends Pieces {
             if(board.getBoard()[this.getLigne() + i][this.getColonne()].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne() + i, this.getColonne()));
             } else {
+                if(board.getBoard()[this.getLigne() + i][this.getColonne()].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne() + i, this.getColonne()));
                 break;
             }
         }
-
 
         return tmp;
     }

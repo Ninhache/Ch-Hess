@@ -36,10 +36,30 @@ public class Pawn extends Pieces {
 
         int id = this.color == ColorPawn.White ? 1 : -1;
 
-        tmp.add(new BoardCase(this.getLigne() + id, this.getColonne()));
-        if(!this.hasMoved) {
-            tmp.add(new BoardCase(this.getLigne() +id + id, this.getColonne()));
+        //if(board.getBoard()[this.getLigne() + id][this.getColonne()])
+        if(board.isOnBoard(this.getLigne() +id, this.getColonne())) {
+            if(board.getBoard()[this.getLigne() +id][this.getColonne()].isEmpty()) {
+                tmp.add(new BoardCase(this.getLigne() + id, this.getColonne()));
+                if(!this.hasMoved) {
+                    if(board.isOnBoard(this.getLigne() +id + id, this.getColonne())) { // < useless security
+                        if(board.getBoard()[this.getLigne() +id +id][this.getColonne()].isEmpty()) {
+                            tmp.add(new BoardCase(this.getLigne() +id + id, this.getColonne()));
+                        }
+                    }
+                }
+            }
         }
+
+
+
+        if(this.color == ColorPawn.White) {
+            if(board.isOnBoard(this.getLigne()+1, this.getColonne()-1)) if(!board.getBoard()[this.getLigne()+1][this.getColonne()-1].isEmpty()) if(board.getBoard()[this.getLigne()+1][this.getColonne()-1].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne()+1, this.getColonne()-1));
+            if(board.isOnBoard(this.getLigne()+1, this.getColonne()+1)) if(!board.getBoard()[this.getLigne()+1][this.getColonne()+1].isEmpty()) if(board.getBoard()[this.getLigne()+1][this.getColonne()+1].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne()+1, this.getColonne()+1));
+        } else {
+            if(board.isOnBoard(this.getLigne()-1, this.getColonne()-1)) if(!board.getBoard()[this.getLigne()-1][this.getColonne()-1].isEmpty()) if(board.getBoard()[this.getLigne()-1][this.getColonne()-1].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne()-1, this.getColonne()-1));
+            if(board.isOnBoard(this.getLigne()-1, this.getColonne()+1)) if(!board.getBoard()[this.getLigne()-1][this.getColonne()+1].isEmpty()) if(board.getBoard()[this.getLigne()-1][this.getColonne()+1].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne()-1, this.getColonne()+1));
+        }
+
 
         return tmp;
     }

@@ -37,6 +37,7 @@ public class Bishop extends Pieces {
             if(board.getBoard()[this.getLigne() + i][this.getColonne() + i].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne() + i, this.getColonne() + i));
             } else {
+                if(board.getBoard()[this.getLigne() + i][this.getColonne() + i].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne() + i, this.getColonne() + i));
                 break;
             }
         }
@@ -46,6 +47,7 @@ public class Bishop extends Pieces {
             if(board.getBoard()[this.getLigne() + i][this.getColonne() + i].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne() - i, this.getColonne() + i));
             } else {
+                if(board.getBoard()[this.getLigne() - i][this.getColonne() + i].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne() - i, this.getColonne() + i));
                 break;
             }
         }
@@ -55,6 +57,7 @@ public class Bishop extends Pieces {
             if(board.getBoard()[this.getLigne() - i][this.getColonne() - i].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne() - i, this.getColonne() - i));
             } else {
+                if(board.getBoard()[this.getLigne() - i][this.getColonne() - i].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne() - i, this.getColonne() - i));
                 break;
             }
         }
@@ -64,6 +67,7 @@ public class Bishop extends Pieces {
             if(board.getBoard()[this.getLigne() + i][this.getColonne() - i].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne() + i, this.getColonne() - i));
             } else {
+                if(board.getBoard()[this.getLigne() + i][this.getColonne() - i].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne() + i, this.getColonne() - i));
                 break;
             }
         }

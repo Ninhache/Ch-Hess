@@ -45,7 +45,6 @@ public class Rook extends Pieces {
                 tmp.add(new BoardCase(this.getLigne(), this.getColonne() - i));
             } else {
                 if(board.getBoard()[this.getLigne()][this.getColonne() - i].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne(), this.getColonne() - i));
-                tmp.add(new BoardCase(this.getLigne(), this.getColonne() - i));
                 break;
             }
         }
