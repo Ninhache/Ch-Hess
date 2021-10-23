@@ -11,6 +11,8 @@ public class Board {
     public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
 
     public static final String ANSI_CYAN = "\u001b[36;1m";
+    private final String ANSI_FRONT_BLACK =  "\u001b[30m";
+    private final String ANSI_FRONT_WHITE =  "\u001b[37m";
 
 
 
@@ -141,7 +143,16 @@ public class Board {
                         selectedChar = this.selected.getPieces().getColor() == ColorPawn.White ? selectedChar.toLowerCase() : selectedChar.toUpperCase();
                         res += ANSI_GREEN_BACKGROUND + ( " " + selectedChar + " ") + ANSI_RESET;
                     } else if (this.selected.getPieces().getAccessibleCases(this).contains(board[i][j])){
-                        res += ANSI_RED_BACKGROUND + ANSI_CYAN + " O " + ANSI_RESET;
+                        if(getBoard()[i][j].getPieces() != null) {
+                            Pieces p = getBoard()[i][j].getPieces();
+                            String attackedChar = p.getClass().getSimpleName().charAt(0) + "";
+                            attackedChar = this.selected.getPieces().getColor() == ColorPawn.Black ? attackedChar.toLowerCase() : attackedChar.toUpperCase();
+                            String tmpAnsi = p.getColor() == ColorPawn.Black ? ANSI_FRONT_BLACK : ANSI_FRONT_WHITE;
+                            res += ANSI_RED_BACKGROUND + tmpAnsi + " " + attackedChar + " " + ANSI_RESET;
+                        } else {
+                            res += ANSI_RED_BACKGROUND + ANSI_CYAN + " O " + ANSI_RESET;
+                        }
+
                     } else {
                         res += piece ;
                     }
@@ -177,5 +188,9 @@ public class Board {
         }
 
         return res;
+    }
+
+    public BoardCase getSelected() {
+        return selected;
     }
 }
