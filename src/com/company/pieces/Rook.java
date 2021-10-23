@@ -34,6 +34,7 @@ public class Rook extends Pieces {
             if(board.getBoard()[this.getLigne()][this.getColonne() + i].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne(), this.getColonne() + i));
             } else {
+                if(board.getBoard()[this.getLigne()][this.getColonne() + i].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne(), this.getColonne() + i));
                 break;
             }
         }
@@ -43,6 +44,8 @@ public class Rook extends Pieces {
             if(board.getBoard()[this.getLigne()][this.getColonne() - i].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne(), this.getColonne() - i));
             } else {
+                if(board.getBoard()[this.getLigne()][this.getColonne() - i].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne(), this.getColonne() - i));
+                tmp.add(new BoardCase(this.getLigne(), this.getColonne() - i));
                 break;
             }
         }
@@ -52,6 +55,7 @@ public class Rook extends Pieces {
             if(board.getBoard()[this.getLigne() - i][this.getColonne()].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne() - i, this.getColonne()));
             } else {
+                if(board.getBoard()[this.getLigne() - i][this.getColonne()].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne() - i, this.getColonne()));
                 break;
             }
         }
@@ -61,6 +65,7 @@ public class Rook extends Pieces {
             if(board.getBoard()[this.getLigne() + i][this.getColonne()].isEmpty()) {
                 tmp.add(new BoardCase(this.getLigne() + i, this.getColonne()));
             } else {
+                if(board.getBoard()[this.getLigne() + i][this.getColonne()].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne() + i, this.getColonne()));
                 break;
             }
         }
