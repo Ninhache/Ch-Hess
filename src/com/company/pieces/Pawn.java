@@ -50,8 +50,6 @@ public class Pawn extends Pieces {
             }
         }
 
-
-
         if(this.color == ColorPawn.White) {
             if(board.isOnBoard(this.getLigne()+1, this.getColonne()-1)) if(!board.getBoard()[this.getLigne()+1][this.getColonne()-1].isEmpty()) if(board.getBoard()[this.getLigne()+1][this.getColonne()-1].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne()+1, this.getColonne()-1));
             if(board.isOnBoard(this.getLigne()+1, this.getColonne()+1)) if(!board.getBoard()[this.getLigne()+1][this.getColonne()+1].isEmpty()) if(board.getBoard()[this.getLigne()+1][this.getColonne()+1].getPieces().getColor() != this.getColor()) tmp.add(new BoardCase(this.getLigne()+1, this.getColonne()+1));

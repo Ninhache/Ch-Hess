@@ -126,8 +126,6 @@ public class Board {
         return board[c1][c2].getPieces();
     }
 
-
-
     @Override
     public String toString() {
 

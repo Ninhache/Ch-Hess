@@ -14,6 +14,5 @@ public class Main {
         b.setSelected("E4");
 
         System.out.println(b);
-
     }
 }
